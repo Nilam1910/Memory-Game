@@ -1,0 +1,23 @@
+body{
+   background-attachment: fixed;
+   background-color: yellowgreen;
+}
+
+.pageContainer{
+   width: 375px;
+   margin: 10 auto;  
+}
+.gameGrid{
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+
+   height: 200px;
+   width: 100%;
+   border: 5px solid red;
+}
+.gameGrid img{
+   width: 75px;
+   height: 100px;
+
+}
