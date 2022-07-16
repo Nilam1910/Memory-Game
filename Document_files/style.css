@@ -1,32 +1,23 @@
 body{
    background-attachment: fixed;
    background-color: rgb(140, 140, 175);
-   /* background-image: url("../images/border-card.png"); */
-   background-repeat: no-repeat;
-   background-size: cover;
- 
+   /* background-image: */
+
 }
 
 .pageContainer{
    width: 600px;
    margin: 0 auto;  
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-
+   /* position: absolute; */
 }
    
 .gameGrid{
    display: flex;
    /* justify-content: center; */
    flex-wrap: wrap;
-   position: relative;
    height: 320px;
    width: 100%;
    border: 5px solid red;
-   transform-style: preserve-3d;
-   transition: all 0.8s ease;
 
 }
 .gameGrid img{
