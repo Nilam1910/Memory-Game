@@ -4,33 +4,54 @@ body{
    /* background-image: url("../images/border-card.png"); */
    background-repeat: no-repeat;
    background-size: cover;
- 
 }
-
 .pageContainer{
-   width: 600px;
-   margin: 0 auto;  
+   width: 700px;
+   margin: 0 auto;  /* make them cente whole container content */
    position: absolute;
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-
-}
-   
+}  
 .gameGrid{
    display: flex;
    /* justify-content: center; */
    flex-wrap: wrap;
    position: relative;
-   height: 320px;
+   height: 365px;
    width: 100%;
    border: 5px solid red;
    transform-style: preserve-3d;
    transition: all 0.8s ease;
-
-}
+   perspective: 800px; /*to rotate image nicely */
+   /* grid-gap: .2rem .1rem 2rem 1rem; */
+} 
 .gameGrid img{
    width: 120px;
    height: 160px;
-   /* border: 2px solid black; */
+   border: 5px solid rgb(7, 167, 230);
+   padding: 5px;
 }
+.card{
+   position: relative;
+   transform-style: preserve-3d;
+   
+}
+ .face, 
+ .front{ 
+   position: absolute;
+   /* cursor: pointer; */
+   pointer-events: none;
+   transform: rotateY(180deg);
+ }
+   /* when you click its click now back card not front
+   
+  
+} /* use for front image put on top of back image */
+ /* .front{frontface-visibility:hidden}   */
+
+.front.toggleCard{
+   transform: rotateY(180deg);
+
+}
+

@@ -1,112 +1,107 @@
 document.addEventListener("DOMContentLoaded", ()=>{
-   // make an array with card and image 
-   const getArray = ()=>[   
-      {card: "A", imageSrc: "./images/card_A.webp"},
-      {card: "A", imageSrc: "./images/card_A.webp"},
-      {card: "king", imageSrc: "./images/card_K.webp"},
-      {card: "king", imageSrc: "./images/card_K.webp"},
-      {card: "queen", imageSrc: "./images/card_Q.webp"},
-      {card: "queen", imageSrc: "./images/card_Q.webp"},
-      {card: "Joker", imageSrc: "./images/card_J.webp"}, 
-      {card: "Joker" , imageSrc: "./images/card_J.webp"},
-      {card: "J", imageSrc: "./images/card_J1.webp"}, 
-      {card: "J", imageSrc: "./images/card_J1.webp"}   
-   ]
-   // console.log(getArray) //worked
-   // lets grab few things from html
-   const grabGameGrid = document.querySelector(".gameGrid")
-   // use sort method to randamize array
-   const randamize = () => {
+      // make an array with card and image 
+      const getArray = ()=>[   
+      {cardName: "A", imageSrc: "./images/card_A.webp"},
+      {cardName: "A", imageSrc: "./images/card_A.webp"},
+      {cardName: "king", imageSrc: "./images/card_K.webp"},
+      {cardName: "king", imageSrc: "./images/card_K.webp"},
+      {cardName: "queen", imageSrc: "./images/card_Q.webp"},
+      {cardName: "queen", imageSrc: "./images/card_Q.webp"},
+      {cardName: "Joker", imageSrc: "./images/card_J.webp"}, 
+      {cardName: "Joker" , imageSrc: "./images/card_J.webp"},
+      {cardName: "J", imageSrc: "./images/card_J1.webp"}, 
+      {cardName: "J", imageSrc: "./images/card_J1.webp"}   
+      ]
+      // console.log(getArray) //worked
+      // lets grab few things from html
+      const grabGameGrid = document.querySelector(".gameGrid")
+      const grabAttemptsHolder = document.querySelector(".attemptsHolder")
+      const grabFoundHolder = document.querySelector(".foundHolder")   
+      // grabAttemptsHolder.textContent = attempts // to count how many attempts happend
+      // grabFoundHolder.textContent = foundMakeImgs  // to count how many match you found
+      const CardsInGame = 5   // total 5 pairs of image  ---------------??????
+      let attempts = 0  // to start for chose image from 0
+      let foundcards = 0 // to start how many images found from 0
+      const chosencard = []
+       = []  //we donot know which image going to be chosen so lefted empty---------???
+      const chosenCardsId =[]
+      // const chosenMakeImgsId = []//we donot know which image id going to be chosen so lefted empty------???
+      // use sort method to randamize array
+      const randamize = () => {
       const cardArray = getArray()
       // console.log(cardArray) // worked
       cardArray.sort(()=> Math.random() -0.5)
       // console.log(cardArray)  // worked
       return cardArray
-   }
-   //  randamize()
+      }
+      //  randamize()
 
-   // card generator function
-   const cardGenerator = () => {
+      //  card generator function
+      const cardGenerator = () => {
       const cardArray = randamize()
       console.log(cardArray)
-      cardArray.forEach((item)=>{
+      
+         cardArray.forEach((item)=>{
 
-         const card = document.createElement("div")
+         const card = document.createElement("div1")
+         const back = document.createElement("img")
          const front = document.createElement("img")
-         const back = document.createElement("div")
-         card.classList = "card"
+         card.classList = "card" // made class of each
          front.classList = "front"
          back.classList = "back"
          grabGameGrid.appendChild(card)
          card.appendChild(front)
          card.appendChild(back)
-         front.src = item.imageSrc
+         back.src = item.imageSrc // back image attached it
+         // grab another image for font and attached with 
+         front.setAttribute("src","images/Rainbow_background.webp")// in css you have to write ( .card{position: relative; transform-style: prserve-3d;transsition: all 2s ease; transform: rotateY(180deg) } and .face, .front{ position: absolute; backface-visibility: hidden}) to set image top of back image and
+              
+            card.addEventListener("click", (e) =>{
+            card.classList.toggle("toggleCard") //use for animation
+            checkCards(e)
+            // console.log(e)
+            front.style.display="none" // add because was fliping back card image also
+         })
       })
    }
-   cardGenerator()
-   // create variable for get gameGrid
-//    
-//    console.log(grabGameGrid)  //worked
-//   // grab few things
-//    const grabAttemptsHolder = document.querySelector(".attemptsHolder")
-//    const grabFoundHolder = document.querySelector(".foundHolder")
-//    // const makeImgsInGame = 5   // total 5 pairs of image  ---------------??????
-//    let attempts = 0  // to start for chose image from 0
-//    let foundMakeImgs = 0 // to start how many images found from 0
-//    grabAttemptsHolder.textContent = attempts // to count how many attempts happend
-//    grabFoundHolder.textContent = foundMakeImgs  // to count how many match you found
-   // const chosenMakeImgs = []  //we donot know which image going to be chosen so lefted empty---------???
-   // const chosenMakeImgsId = []//we donot know which image id going to be chosen so lefted empty------???
-
-   // make a function for board
-   // function initiateBoard (){
-   //    for (let i = 0; i < cardsArray.length; i++) {   // for loop for cards array
+      cardGenerator()
+       
+      const checkCards = (e) => {
+         //  console.log(e) // worked
+         const clickedCard = e.target
+         clickedCard.classList.add("flip") // worked because of (css line 53) 
+         // console.log(clickedCard) // worked
          
-   //       console.log(cardsArray[1]) //worked
-   //      var makeImg = document.createElement("img")   // variable createing image 
-   //      console.log(makeImg)
-   //      grabGameGrid.appendChild(makeImg) //images pushed to gameGrid
-   //      makeImg.setAttribute("src", cardsArray[1])
-         //   let front = makeImg.setAttribute("src","../images/Rainbow_background.webp")  // set attribute source
-         //   let back = makeImg.setAttribute("src", i[1])
-        makeImg.setAttribute("id","placeHolder")   // set attribute id veriable for loop
-        const palceHolder = document.getElementById("palceHolder")
-      //   palceHolder.addEventListener("click",flipPlaceHolder)
-      //   function flipPlaceHolder(){
-      //    palceHolder.classList.toggle("flipPlaceHolder")
-      //   }
-      //   const makeImg1 = document.createElement("img1")
-      //    //   const makeH1 = document.createElement("h1")
-      //    //   makeH1.innerHTML = myFrontText
-      //    //   makeImg1.appendChild(makeH1)
-      //   const makeImg2 = document.createElement("img2")
+      //       let timer = 30
+      //        const clickedCardActive = setInterval(()=>{
+      //             timer--
+      //             // console.log(timer)   // worked  
+      //           if(back.src == 2){
+      //              console.log(clickedCard.length)
+      //              if(clickedCard[0] === clickedCard[1]){
+      //               alert("nice job ! ")
+      //             //  setTimeout(clickedCard, 300)// to stop timer otherwise flip all sometime
+      //             }else{
+      //              card.style.display="flex"  // to go back to flex
+      //              alert("keep trying")
+      //                }
+      //           }
+      //       },3000)
+               
+            
+         }
+
+      
+
+       
         
-        
-   //    //   makeImg1.setAttribute("class", "front") // for front image
-   //    //   makeImg2.setAttribute("class","back")
-   //    //   makeImg.appendChild(makeImg1)
-   //    //   makeImg.appendChild(makeImg2)
-   //    //   palceHolder.addEventListener("click",flipPlaceHolder) // attched function flip image with adding eventListener
-        
-   //    }    
-   // }
-   // //    function flipMakeImg(){
-   // //       if(chosenMakeImgs.length !=2){ // if statement for chosen image out of images
-   // //          var makeImgId = this.getAttribute("id","placeHolder")
-   // //          // set if statements for source of blank image
-   // //          if(this.getAttribute("src") != "images/card_blank.png"){ // not working
-   // //          // push the chosen cards in to cards array cardId name so know which one get choosen
-   // //          chosenMakeImgs.push(cardsArray[makeImgId].cardName)
-   // //          // then another push for chosen image ids so know for flip chosen to place on blank card
-   // //          chosenMakeImgsId.push(makeImgId)
-   // //          this.setAttribute("src",cardsArray[makeImgId].image)
-   // //          // if statemnet for choosen card not equal to two then its run,because while time out been running we need to able click another card to match
-   // //          if(chosenMakeImgs.length == 2){
-   // //             setTimeout(checkForMatch, 300)// to stop timer otherwise flip all sometime
-   // //          }
-   // //         }
-   // //      }
-   // //    }
+
+      // if(chosenFlipCards.length !=2){ // if statement for chosen image out of images
+         // set if statements for source of blank image
+   // if(this.getAttribute("src") != "images/card_blank.png"){ // not working
+   //    chosenFlipCards.push(back.src.cardName)//image with cardName
+      // if statemnet for choosen card not equal to two then its run,because while time out been running we need to able click another card to match
+
    // //    function checkForMatch(){
    // //       attempts++
    // //       var makeImgs = document.querySelectorAll("img")
@@ -127,7 +122,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
    // //       if(foundMakeImgs == makeImgsInGame)
    // //       alert("nice job ! ")
    // //    }
-   //  initiateBoard()
+   
    
    
    
