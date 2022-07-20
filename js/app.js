@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", ()=>{       
       // make an array with card and image 
       const getArray = ()=>[   
       {cardName: "A", imageSrc: "./images/card_A.webp"},
@@ -16,62 +16,115 @@ document.addEventListener("DOMContentLoaded", ()=>{
       // lets grab few things from html
       const grabGameGrid = document.querySelector(".gameGrid")
       const grabAttemptsHolder = document.querySelector(".attemptsHolder")
-      const grabFoundHolder = document.querySelector(".foundHolder")   
-      // grabAttemptsHolder.textContent = attempts // to count how many attempts happend
-      // grabFoundHolder.textContent = foundMakeImgs  // to count how many match you found
-      const CardsInGame = 5   // total 5 pairs of image  ---------------??????
-      let attempts = 0  // to start for chose image from 0
-      let foundcards = 0 // to start how many images found from 0
-      const chosencard = []
-       = []  //we donot know which image going to be chosen so lefted empty---------???
-      const chosenCardsId =[]
-      // const chosenMakeImgsId = []//we donot know which image id going to be chosen so lefted empty------???
-      // use sort method to randamize array
-      const randamize = () => {
-      const cardArray = getArray()
-      // console.log(cardArray) // worked
-      cardArray.sort(()=> Math.random() -0.5)
-      // console.log(cardArray)  // worked
-      return cardArray
-      }
-      //  randamize()
-
-      //  card generator function
-      const cardGenerator = () => {
-      const cardArray = randamize()
-      console.log(cardArray)
-      
-         cardArray.forEach((item)=>{
-
-         const card = document.createElement("div1")
-         const back = document.createElement("img")
-         const front = document.createElement("img")
-         card.classList = "card" // made class of each
-         front.classList = "front"
-         back.classList = "back"
-         grabGameGrid.appendChild(card)
-         card.appendChild(front)
-         card.appendChild(back)
-         back.src = item.imageSrc // back image attached it
-         // grab another image for font and attached with 
-         front.setAttribute("src","images/Rainbow_background.webp")// in css you have to write ( .card{position: relative; transform-style: prserve-3d;transsition: all 2s ease; transform: rotateY(180deg) } and .face, .front{ position: absolute; backface-visibility: hidden}) to set image top of back image and
-              
-            card.addEventListener("click", (e) =>{
-            card.classList.toggle("toggleCard") //use for animation
-            checkCards(e)
-            // console.log(e)
-            front.style.display="none" // add because was fliping back card image also
-         })
-      })
-   }
-      cardGenerator()
+      const grabFoundHolder = document.querySelector(".foundHolder") 
        
+      var chosenCardId =[]//we donot know which image id going to be chosen so lefted empty
+      var chosenCard = []  //we donot know which image going to be chosen so lefted empty
+      const CardsInGame = 5   // total 5 pairs of image  
+      var attempts = 0  // to start for chose image from 0
+      var found = 0 // to start how many images found from 0
+      grabAttemptsHolder.textContent = attempts // 
+      grabFoundHolder.textContent = found 
+      
+         // use sort method to randamize array
+         const randamize = () => {
+         const cardArray = getArray()
+         // console.log(cardArray) // worked
+         cardArray.sort(()=> Math.random() -0.5)
+         // console.log(cardArray)  // worked
+         return cardArray // if not return it will undefind
+      }
+         //  randamize()
+
+         //  card generator function
+         const cardGenerator = () => {
+         const cardArray = randamize()
+         console.log(cardArray)
+         // cardArray.forEach((item)=>
+         
+         function board (){
+            for(let i=0; i<cardArray.length; i++){
+               console.log(i)
+               const card = document.createElement("div")
+               const back = document.createElement("img")
+               const front = document.createElement("img")
+            back.setAttribute("Id", cardArray[i].cardName )
+            card.classList = "card" // made class of each
+            front.classList = "front"
+            back.classList = "back"
+            
+            grabGameGrid.appendChild(card)
+            card.appendChild(front)
+            card.appendChild(back)
+            back.src = cardArray[i].imageSrc // back image attached it
+            // grab another image for font and attached with 
+            front.setAttribute("src","images/Rainbow_background.webp")// in css you have to write ( .card{position: relative; transform-style: prserve-3d;transsition: all 2s ease; transform: rotateY(180deg) } and .face, .front{ position: absolute;        backface-visibility: hidden}) to set image top of back image and
+            
+            //   front.addEventListener("click", "Flip")   
+            card.addEventListener("click", (e) =>{
+               card.classList.toggle("toggleCard") //use for animation
+               checkCards(e)
+               // console.log(e)
+               front.style.display="none" // add because was fliping back card image also
+            // })
+            })
+         }
+      }
+      board()
+   }
+    
       const checkCards = (e) => {
          //  console.log(e) // worked
-         const clickedCard = e.target
-         clickedCard.classList.add("flip") // worked because of (css line 53) 
-         // console.log(clickedCard) // worked
+         // if(chosenCard.length !==2){
+            let clickedCard = e.target.id
+            // clickedCard.classList.add("flip") // worked  
+            console.log(clickedCard) // worked
+            chosenCardId.push(clickedCard) //chosencard from ref line 22 
+            // console.log(chosenCardId)  //worked
+            if(chosenCardId.length===2){
+               console.log(chosenCardId)
+            }
+               
+         }
+         let cards = document.querySelectorAll(".toggleCard" ) 
+            console.log(cards)
+         function checkForMatch(){
+            attempts++;
+            // worked when 2card chosen
+            
+           
+            let firstCard = chosenCard[0]
+            let secondCard = chosenCard[1] 
+         // console.log(firstCard) 
+         // console.log(cards)
+         if(chosenCard[0]===chosenCard[1]) { // .src tooken off
+            found++
+            console.log("if condition worked")
+
+            // alert("Good job! you found the match")
+            // cards[0].setAttribute("src", "images/card_blank.png")
+            // cards[1].setAttribute("src", "images/card_blank.png")   
+           }
+         //   {
+         //       // alert("keep trying to find the match")
+         //       cards[0].setAttribute("src","images/Rainbow_background.webp")
+         //       cards[1].setAttribute("src","images/Rainbow_background.webp")
+         //    }
+            // chosenCard = [];
+            // grabAttemptsHolder.textContent = attempts  
+            // grabFoundHolder.textContent = found 
+            // if(found=CardsInGame){
+            //    alert("Nice job you found all the cards ")
+            // }
+         } 
          
+         checkForMatch()
+         // checkCards() no need
+         // checkForMatch() no need to invock  
+          
+   cardGenerator()      
+})
+
       //       let timer = 30
       //        const clickedCardActive = setInterval(()=>{
       //             timer--
@@ -89,7 +142,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
       //       },3000)
                
             
-         }
 
       
 
@@ -102,26 +154,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
    //    chosenFlipCards.push(back.src.cardName)//image with cardName
       // if statemnet for choosen card not equal to two then its run,because while time out been running we need to able click another card to match
 
-   // //    function checkForMatch(){
-   // //       attempts++
-   // //       var makeImgs = document.querySelectorAll("img")
-   // //       var firstMakeImg = chosenMakeImgs[0]
-   // //       var secondMakeImg = chosenMakeImgs[1]
-   // //       if (chosenMakeImgs[0] == chosenMakeImgs[1]){
-   // //          foundMakeImgs++
-   // //          makeImgs[firstMakeImg].setAttribute("src","images/card_blank.png")
-   // //          makeImgs[secondMakeImg].setAttribute("src","images/card_blank.png")
-   // //       }else{
-   // //          makeImgs[firstMakeImg].setAttribute("src","images/placeholder.webp")
-   // //          makeImgs[secondMakeImg].setAttribute("src","images/placeholder.webp")
-   // //       }
-   // //       chosenMakeImgs = []
-   // //       chosenMakeImgsId = []
-   // //       grabAttemptsHolder.textContent = attempts
-   // //       grabFoundHolder.textContent = foundMakeImgs
-   // //       if(foundMakeImgs == makeImgsInGame)
-   // //       alert("nice job ! ")
-   // //    }
+  
    
    
    
@@ -136,5 +169,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
    // // how to attach two player with this 
    // // set compair staement with alert who win
 
-  
-})
+   // if(attempts === 0){
+   //    firstSelection = back.src.getAttribute("back.src")
+   //    return
+      
+   // }else{
+   //    secondSelection = back.src.getAttribute("front.src")
+   //    return
+   //    attempts = 0
+      
+   // }

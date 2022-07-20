@@ -1,12 +1,14 @@
 body{
    background-attachment: fixed;
    background-color: rgb(140, 140, 175);
-   /* background-image: url("../images/border-card.png"); */
+   
+   background-image: url(../images/blue-wave.jpeg);
+
    background-repeat: no-repeat;
    background-size: cover;
 }
 .pageContainer{
-   width: 700px;
+   width: 660px;
    margin: 0 auto;  /* make them cente whole container content */
    position: absolute;
    top: 50%;
@@ -18,19 +20,19 @@ body{
    /* justify-content: center; */
    flex-wrap: wrap;
    position: relative;
-   height: 365px;
+   height: 348px;
    width: 100%;
    border: 5px solid red;
-   transform-style: preserve-3d;
-   transition: all 0.8s ease;
-   perspective: 800px; /*to rotate image nicely */
+   /* transform-style: preserve-3d;
+   transition: all 0.8s ease; */
+   /* perspective: 800px; to rotate image nicely */
    /* grid-gap: .2rem .1rem 2rem 1rem; */
 } 
 .gameGrid img{
    width: 120px;
    height: 160px;
-   border: 5px solid rgb(7, 167, 230);
-   padding: 5px;
+   border: 5px solid rgb(116, 116, 145);
+   padding: 1px;
 }
 .card{
    position: relative;
@@ -45,13 +47,5 @@ body{
    transform: rotateY(180deg);
  }
    /* when you click its click now back card not front
-   
-  
-} /* use for front image put on top of back image */
- /* .front{frontface-visibility:hidden}   */
 
-.front.toggleCard{
-   transform: rotateY(180deg);
-
-}
 
