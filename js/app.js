@@ -48,17 +48,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
                const card = document.createElement("div")
                const back = document.createElement("img")
                const front = document.createElement("img")
-            back.setAttribute("Id", cardArray[i].cardName )
-            card.classList = "card" // made class of each
-            front.classList = "front"
-            back.classList = "back"
+               back.setAttribute("Id", cardArray[i].cardName )
+               card.classList = "card" // made class of each
+               front.classList = "front"
+               back.classList = "back"
             
-            grabGameGrid.appendChild(card)
-            card.appendChild(front)
-            card.appendChild(back)
-            back.src = cardArray[i].imageSrc // back image attached it
-            // grab another image for font and attached with 
-            front.setAttribute("src","images/Rainbow_background.webp")// in css you have to write ( .card{position: relative; transform-style: prserve-3d;transsition: all 2s ease; transform: rotateY(180deg) } and .face, .front{ position: absolute;        backface-visibility: hidden}) to set image top of back image and
+               grabGameGrid.appendChild(card)
+               card.appendChild(front)
+               card.appendChild(back)
+               back.src = cardArray[i].imageSrc // back image attached it
+               // grab another image for font and attached with 
+               front.setAttribute("src","images/Rainbow_background.webp")// in css you have to write ( .card{position: relative; transform-style: prserve-3d;transsition: all 2s ease; transform: rotateY(180deg) } and .face, .front{ position: absolute;        backface-visibility: hidden}) to set image top of back image and
             
             //   front.addEventListener("click", "Flip")   
             card.addEventListener("click", (e) =>{
@@ -83,47 +83,45 @@ document.addEventListener("DOMContentLoaded", ()=>{
             // console.log(chosenCardId)  //worked
             if(chosenCardId.length===2){
                console.log(chosenCardId)
+               checkForMatch()
             }
                
          }
-         let cards = document.querySelectorAll(".toggleCard" ) 
-            console.log(cards)
-         function checkForMatch(){
-            attempts++;
-            // worked when 2card chosen
-            
            
-            let firstCard = chosenCard[0]
-            let secondCard = chosenCard[1] 
-         // console.log(firstCard) 
-         // console.log(cards)
-         if(chosenCard[0]===chosenCard[1]) { // .src tooken off
-            found++
-            console.log("if condition worked")
+         function checkForMatch(){
+               attempts++;
+               if(chosenCardId[0]===chosenCardId[1]) { 
+                  found++
+                  console.log("if condition worked")
 
-            // alert("Good job! you found the match")
-            // cards[0].setAttribute("src", "images/card_blank.png")
-            // cards[1].setAttribute("src", "images/card_blank.png")   
-           }
-         //   {
-         //       // alert("keep trying to find the match")
-         //       cards[0].setAttribute("src","images/Rainbow_background.webp")
-         //       cards[1].setAttribute("src","images/Rainbow_background.webp")
-         //    }
-            // chosenCard = [];
-            // grabAttemptsHolder.textContent = attempts  
-            // grabFoundHolder.textContent = found 
-            // if(found=CardsInGame){
-            //    alert("Nice job you found all the cards ")
-            // }
-         } 
+                  alert("Good job! you found the match")
+                  cards[0].setAttribute("src", "images/card_blank.png")
+                  cards[1].setAttribute("src", "images/card_blank.png")   
+               }else{
+            
+                  // alert("keep trying to find the match")
+                  cards[0].setAttribute("src","images/Rainbow_background.webp")
+                  cards[1].setAttribute("src","images/Rainbow_background.webp")
+            
+                  chosenCardId = [];
+                  grabAttemptsHolder.textContent = attempts  
+                  grabFoundHolder.textContent = found 
+                  if(found=CardsInGame){
+                     alert("Nice job you found all the cards ")
+             
+                  }
+               }  
+            }
+
+
+
+         cardGenerator()
          
-         checkForMatch()
          // checkCards() no need
          // checkForMatch() no need to invock  
-          
-   cardGenerator()      
-})
+   
+         
+   })
 
       //       let timer = 30
       //        const clickedCardActive = setInterval(()=>{
