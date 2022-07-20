@@ -2,15 +2,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
       // make an array with card and image 
       const getArray = ()=>[   
       {cardName: "A", imageSrc: "./images/card_A.webp"},
-      {cardName: "A", imageSrc: "./images/card_A.webp"},
+      {cardName: "A1", imageSrc: "./images/card_A.webp"},
       {cardName: "king", imageSrc: "./images/card_K.webp"},
-      {cardName: "king", imageSrc: "./images/card_K.webp"},
+      {cardName: "king1", imageSrc: "./images/card_K.webp"},
       {cardName: "queen", imageSrc: "./images/card_Q.webp"},
-      {cardName: "queen", imageSrc: "./images/card_Q.webp"},
+      {cardName: "queen1", imageSrc: "./images/card_Q.webp"},
       {cardName: "Joker", imageSrc: "./images/card_J.webp"}, 
-      {cardName: "Joker" , imageSrc: "./images/card_J.webp"},
+      {cardName: "Joker1", imageSrc: "./images/card_J.webp"},
       {cardName: "J", imageSrc: "./images/card_J1.webp"}, 
-      {cardName: "J", imageSrc: "./images/card_J1.webp"}   
+      {cardName: "J1", imageSrc: "./images/card_J1.webp"}   
       ]
       // console.log(getArray) //worked
       // lets grab few things from html
@@ -46,9 +46,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
             for(let i=0; i<cardArray.length; i++){
                console.log(i)
                const card = document.createElement("div")
+
                const back = document.createElement("img")
                const front = document.createElement("img")
                back.setAttribute("Id", cardArray[i].cardName )
+               card.setAttribute("Id", cardArray[i].cardName + "div")
                card.classList = "card" // made class of each
                front.classList = "front"
                back.classList = "back"
@@ -76,13 +78,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
       const checkCards = (e) => {
          //  console.log(e) // worked
          // if(chosenCard.length !==2){
-            let clickedCard = e.target.id
+            let clickedCard = e.target
             // clickedCard.classList.add("flip") // worked  
             console.log(clickedCard) // worked
-            chosenCardId.push(clickedCard) //chosencard from ref line 22 
+            chosenCard.push(clickedCard) //chosencard from ref line 22 
             // console.log(chosenCardId)  //worked
-            if(chosenCardId.length===2){
-               console.log(chosenCardId)
+            if(chosenCard.length===2){
+               console.log(chosenCard)
                checkForMatch()
             }
                
@@ -90,20 +92,21 @@ document.addEventListener("DOMContentLoaded", ()=>{
            
          function checkForMatch(){
                attempts++;
-               if(chosenCardId[0]===chosenCardId[1]) { 
+               if(chosenCard[0].src===chosenCard[1].src) { 
+                  
                   found++
-                  console.log("if condition worked")
-
                   alert("Good job! you found the match")
-                  cards[0].setAttribute("src", "images/card_blank.png")
-                  cards[1].setAttribute("src", "images/card_blank.png")   
+
+                  chosenCard[0].setAttribute("src", "images/card_blank.png")//accessing 
+                  chosenCard[1].setAttribute("src", "images/card_blank.png")   
+               
                }else{
-            
                   // alert("keep trying to find the match")
-                  cards[0].setAttribute("src","images/Rainbow_background.webp")
-                  cards[1].setAttribute("src","images/Rainbow_background.webp")
             
-                  chosenCardId = [];
+                  chosenCard[0].setAttribute("src","images/Rainbow_background.webp")
+                  chosenCard[1].setAttribute("src","images/Rainbow_background.webp")
+            
+                  chosenCard = [];
                   grabAttemptsHolder.textContent = attempts  
                   grabFoundHolder.textContent = found 
                   if(found=CardsInGame){
@@ -118,7 +121,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
          cardGenerator()
          
          // checkCards() no need
-         // checkForMatch() no need to invock  
+         // checkForMatch() no need to invock again because we did in checkcards() 
    
          
    })
