@@ -2,15 +2,15 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
       // make an array with card and image 
       const getArray = ()=>[   
       {cardName: "A", imageSrc: "./images/card_A.webp"},
-      {cardName: "A1", imageSrc: "./images/card_A.webp"},
+      {cardName: "A", imageSrc: "./images/card_A.webp"},
       {cardName: "king", imageSrc: "./images/card_K.webp"},
-      {cardName: "king1", imageSrc: "./images/card_K.webp"},
+      {cardName: "king", imageSrc: "./images/card_K.webp"},
       {cardName: "queen", imageSrc: "./images/card_Q.webp"},
-      {cardName: "queen1", imageSrc: "./images/card_Q.webp"},
+      {cardName: "queen", imageSrc: "./images/card_Q.webp"},
       {cardName: "Joker", imageSrc: "./images/card_J.webp"}, 
-      {cardName: "Joker1", imageSrc: "./images/card_J.webp"},
+      {cardName: "Joker", imageSrc: "./images/card_J.webp"},
       {cardName: "J", imageSrc: "./images/card_J1.webp"}, 
-      {cardName: "J1", imageSrc: "./images/card_J1.webp"}   
+      {cardName: "J", imageSrc: "./images/card_J1.webp"}   
       ]
       // console.log(getArray) //worked
       // lets grab few things from html
@@ -49,14 +49,12 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
 
                const back = document.createElement("img")
                const front = document.createElement("img")
-               back.setAttribute("Id", cardArray[i].cardName )
-               card.setAttribute("Id", cardArray[i].cardName + "div")
+               back.setAttribute("name", cardArray[i].cardName )
+               card.setAttribute("name", cardArray[i].cardName + "div") //geting back when do surch card
                card.classList = "card" // made class of each
                front.classList = "front"
                back.classList = "back"
-            
                grabGameGrid.appendChild(card)
-               
                card.appendChild(back)
                card.appendChild(front)
                back.src = cardArray[i].imageSrc // back image attached it
@@ -66,61 +64,60 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
                //   front.addEventListener("click", "Flip")   
                card.addEventListener("click", (e) =>{ //event been triger with (e)
                card.classList.toggle("toggleCard") //use for animation
+               card.classList.add("flipCard") // easy way to ask browse to slect the card what we going to compair
                checkCards(e)
                // console.log(e)
-                  
-            
             })
          }
       }
       board()
-   }
+   }      
       const checkCards = (e) => {
             //  console.log(e) // worked
-            // if(chosenCard.length !==2){
-            let clickedCard = e.target
-            // clickedCard.classList.add("flip") // worked  
-            // console.log(clickedCard) // worked with id and src
-            chosenCard.push(clickedCard) //chosencard from ref line 22 
-            // console.log(chosenCardId)  //worked in emapty array
+            chosenCard = document.querySelectorAll(".flipCard")
+              //chosencard from ref line 22 
+            //  console.log(chosenCard)  //worked in emapty array grab all [div.card.toggleCard.flipCard]
             if(chosenCard.length===2){
-               console.log(chosenCard[1]) // id only like img#j.back //with chosenCard[1] retrive id and src both
+               // console.log(chosenCard[1]) //when we click second card then we grab name and src both
                checkForMatch()
+               grabFoundHolder.textContent = found
+               grabAttemptsHolder.textContent = attempts  
             }
          }      
          function checkForMatch(){
                attempts++; // will increase after every two card chosen. see line 85
-               // console.log("chosen cards : ", chosenCard[0].src + '' + chosenCard[1].src)
-               
-               var firstCard = chosenCard[1]
-               console.log (firstCard) // with id and src collecting two times for same id
-
-               // if(chosenCard[0].src===chosenCard[1].src) { 
-               //    found++
-               //    alert("Good job! you found the match")
-                  
-               //    chosenCard[0].setAttribute("src", "images/card_blank.png")//accessing 
-               //    chosenCard[1].setAttribute("src", "images/card_blank.png")   
-               // }else{
-               //    // alert("keep trying to find the match")
-               //    let card0 = document.querySelector(`#${chosenCard[0].id + "div"}`)
-               //    let card1 = document.querySelector(`#${chosenCard[1].id + "div"}`)
-               //    card0.classList.toggle("toggleCard")
-               //    card1.classList.toggle("toggleCard")
-               //    // chosenCard[0]=classList //setAttribute("src","images/Rainbow_background.webp")
-               //    // chosenCard[1]=classList //setAttribute("src","images/Rainbow_background.webp")
-            
-               //    chosenCard = [];
-               //    grabAttemptsHolder.textContent = attempts  
-               //    grabFoundHolder.textContent = found 
-               //    if(found=CardsInGame){
-               //       alert("Nice job you found all the cards ")
+         
+               if(chosenCard[0].getAttribute("name") === chosenCard[1].getAttribute("name")) { //  store infomation in div under the name attribute
+                  found++
+                  alert("Good job! you found the match")
+                  chosenCard[0].classList.remove("flipCard" )
+                  chosenCard[1].classList.remove("flipCard" )
+                  // chosenCard[0].setAttribute("src", "images/card_blank.png")//accessing 
+                  // chosenCard[1].setAttribute("src", "images/card_blank.png") 
+                  if(found == CardsInGame){
+                     alert("Nice job you found all the cards ")
+                  }  
              
-               //    }
-               // }  
+               }else{
+                  alert("keep trying to find the match")
+                  setTimeout(()=>{
+                     chosenCard[0].classList.toggle("toggleCard" )
+                     chosenCard[1].classList.toggle("toggleCard" )
+                  },1000)
+                  
+                  chosenCard[0].classList.remove("flipCard" )
+                  chosenCard[1].classList.remove("flipCard" )
+                  // chosenCard[0]=classList //setAttribute("src","images/Rainbow_background.webp")
+                  // chosenCard[1]=classList //setAttribute("src","images/Rainbow_background.webp")
+            
+               }  
             }
+            cardGenerator()
+                  
+                   
+                  
+                  
 
-         cardGenerator()
          
          // checkCards() no need
          // checkForMatch() no need to invock again because we did in checkcards() 
