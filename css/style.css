@@ -14,18 +14,13 @@ body{
    margin: 0 auto;  /* make them cente whole container content */
    /* position: absolute; top left coner */
    flex-direction: column;
-   margin: 5% auto;
+   margin:  auto;
 } 
 .gameGrid{
    display: grid;
    border: 5px solid red;
-   grid-template-columns: repeat(5, 132px) ;
-   grid-template-rows: repeat(2, 172px);
-   /* position: relative; not needed */
-   /* height: 500px;
-   width: 650px;
-   margin: 5% auto; not needed */ 
-   
+   grid-template-columns: repeat(5, 131px) ;
+   grid-template-rows: repeat(2, 171px);
    perspective: 800px; /* to rotate image nicely */
    grid-gap: .2rem .1rem 2rem 1rem;
 } 
@@ -33,10 +28,9 @@ body{
    width: 120px;
    height: 160px;
    border: 5px solid rgb(116, 116, 145);
-   padding: 1px;
+   padding: 1px 0px 0px 1px;
    position: absolute;
 }
-
 .card{
    position: relative;
    transform-style: preserve-3d;
@@ -50,12 +44,47 @@ body{
    transform: scaleX(-1); /* because of flip image in x axis */
 }
 .front{ 
-  
-  /* cursor: pointer; */
-  pointer-events: none;
-  backface-visibility: hidden;
-  
+   /* cursor: pointer; */
+   pointer-events: none;
+   backface-visibility: hidden;
 }
+p{
+   background-color: rgba(44, 156, 226, 0.575);
+   padding: .5px;
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: medium;
+   font-weight: bolder;
+   text-decoration-color: red;
+   border: 3px solid rgb(116, 116, 145);
+   margin: 40px 0px 05px 0px;
+   
+}
+h2{
+   font-family: Arial, Helvetica, sans-serif;  
+   
+}
+button{
+   background-color: red;
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: bolder;
+   font-size: medium;
+   border: 5px solid rgb(116, 116, 145);
+   margin: 40px 0px 0px 0px;
+  
+}  
+#playerOneFoundHolder ,#playerOneAttemptsHolder{
+   background-color: red;
+   box-sizing: content-box;
+}
+#playerTwoFoundHolder ,#playerTwoAttemptsHolder{
+   background-color: red;
+   box-sizing: content-box;
+}
+#timeHolder{
+   background-color: red;
+   box-sizing: content-box; 
+}
+  
 
 
  
