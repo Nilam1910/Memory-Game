@@ -21,6 +21,7 @@ Two player game where users have dealt 5pair cards. The cards are flipped by cli
 - By clicking reset button you can play again the game
 
 ## Inital Wireframe:
+<img width="815" alt="Screen Shot 2022-07-23 at 12 12 59 AM" src="https://user-images.githubusercontent.com/104333640/180591455-5027d435-df10-420d-abad-5134c4215cbe.png">
 
 ## Psedocode:
 
