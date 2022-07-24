@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
       const grabPlayerTwoAttemptsHolder = document.querySelector("#playerTwoAttemptsHolder")
       const grabPlayerTwoFoundHolder = document.querySelector("#playerTwoFoundHolder")
       // const grabTimeHolder = document.querySelector("#timeHolder")
+      // var music = {
+      //    src:[""]
+      // }
       var chosenCardId =[] 
       var chosenCard = []  
       const cardsInGame = 5   // total 5 pairs of image  
@@ -37,7 +40,10 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
       grabPlayerOneFoundHolder.textContent = playerOne.found
       grabPlayerTwoAttemptsHolder.textContent = playerTwo.attempts
       grabPlayerTwoFoundHolder.textContent = playerTwo.found
-      
+      const grabTimeHolder = document.querySelector("#timeHolder")
+      var time1 = {time: 60}
+      let time1Active;
+      grabTimeHolder.textContent = time1.time
          // use sort method to randamize array
       const randamize = () => {
          const cardArray = getArray()
@@ -48,11 +54,11 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
       }
          //  randamize() // need that untill you write next function
          //  card generator function
-         const cardGenerator = () => {
+      const cardGenerator = () => {
          const cardArray = randamize()
          // console.log(cardArray)
-         function board (){
-            for(let i=0; i<cardArray.length; i++){
+      function board (){
+         for(let i=0; i<cardArray.length; i++){
                console.log(i)
                const card = document.createElement("div")
                const back = document.createElement("img")
@@ -68,7 +74,7 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
                back.src = cardArray[i].imageSrc // back image attached it
                // grab another image for font and attached with 
                front.setAttribute("src","images/Rainbow_background.webp") 
-               card.addEventListener("click", (e) =>{ //event been triger with (e)
+            card.addEventListener("click", (e) =>{ //event been triger with (e)
                   card.classList.toggle("toggleCard") //use for animation
                   card.classList.add("flipCard") // easy way to ask browse to slect the card what we going to compair
                   checkCards(e)
@@ -85,6 +91,7 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
             if(chosenCard.length===2){
                   // console.log(chosenCard[1]) //when we click second card then we grab name and src both
                   checkForMatch()
+                 
                   /* grabFoundHolder.textContent = found
                      grabAttemptsHolder.textContent = attempts */ // for only player game
                   grabPlayerOneAttemptsHolder.textContent = playerOne.attempts
@@ -93,20 +100,33 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
                   grabPlayerTwoFoundHolder.textContent = playerTwo.found 
                   grabPlayerTwoFoundHolder.textContent = playerTwo.found
                   
-                  playerOneTurn = !playerOneTurn // that gives playerOne and plyerTwo turn by turn
+                  playerOneTurn = !playerOneTurn // that mean its plyerTwo turn so that gives playerOne and plyerTwo turn by turn
                }
-         }      
+
+         }  
+         function time(){
+          time1Active = setInterval(() => {
+               time1.time-=1
+               grabTimeHolder.textContent = time1.time
+               if(time1.time === 0){
+                  clearInterval(time1Active)
+                  alert("Time's Up")
+               }
+            }, 1000);
+         }  
+         time()  
          function checkForMatch(){
-               // attempts++; //will increase after every two card chosen. see line 85    // for only player game
+               // attempts++; //will increase after every two card chosen. see line 90    // for only player game
                if(playerOneTurn == true){
                      playerOne.attempts++
+                     
                   }else{
                      playerTwo.attempts++
                   }
                if(chosenCard[0].getAttribute("name") === chosenCard[1].getAttribute("name")) { //store infomation in div under the name attribute
-                     if(playerOneTurn == true){
+                  if(playerOneTurn == true){
                         playerOne.found++
-                        // time --
+                        // time.time --
                      }else{
                         playerTwo.found++
                      }
@@ -120,8 +140,9 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
                   if (playerOne.found + playerTwo.found === cardsInGame) {
                         
                         alert("Game is Finished")
+                        clearInterval(time1Active)
                         
-                        if (playerOne.found>playerTwo.found) {
+                     if (playerOne.found>playerTwo.found) {
                            
                            alert("Player One Wins The Game")
                         
@@ -135,7 +156,7 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
                    }else{
                      alert("keep trying to find the match")
              
-                  setTimeout(()=>{
+               setTimeout(()=>{
 
                      chosenCard[0].classList.toggle("toggleCard" )
                      chosenCard[1].classList.toggle("toggleCard" )
@@ -147,7 +168,7 @@ document.addEventListener("DOMContentLoaded", ()=>{    // it will give you ablit
                }  
             }
             cardGenerator()
-   })
+})
          
    
 

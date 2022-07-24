@@ -21,7 +21,7 @@ Two player game where users have dealt 5pair cards. The cards are flipped by cli
 - By clicking reset button you can play again the game
 
 ## Inital Wireframe:
-
+  /Users/nilampatel/Desktop/sei-cosmos/projects/Meomory-Game/images/Screen Shot 2022-07-23 at 12.12.59 AM.png
 ## Psedocode:
 
 - Put cards on the bord in random order
@@ -54,6 +54,5 @@ Two player game where users have dealt 5pair cards. The cards are flipped by cli
 ## References:
 
 - www.stackoverflow.com
-
 * www.w3schools.com
 * www.elsy.com
